@@ -1,0 +1,121 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use App\Config\src\Environment;
+use App\Config\src\Migration;
+use App\Config\src\Database;
+
+Environment::load(__DIR__);
+Database::config(
+    getenv('DB_HOST'),
+    getenv('DB_NAME'),
+    getenv('DB_USER'),
+    getenv('DB_PASS'),
+    getenv('DB_PORT')
+);
+
+function loadMigrations()
+{
+    $migrations = glob(__DIR__ . '/app/Config/src/Migrations/*.php');
+    foreach ($migrations as $migration) {
+        require_once $migration;
+    }
+}
+
+if ($argc < 2) {
+    echo "Usage: php infinity <command> [arguments]\n";
+    exit(1);
+}
+
+$command = $argv[1];
+
+switch ($command) {
+    case 'make:migration':
+        if ($argc < 3) {
+            echo "Usage: php infinity make:migration <MigrationName>\n";
+            exit(1);
+        }
+
+        $migrationName = $argv[2];
+        $timestamp = date('Y_m_d_His');
+        $filename = __DIR__ . '/app/Config/src/Migrations/' . $migrationName . '_' . $timestamp . '.php';
+
+        $className = $migrationName . '_' . $timestamp; // Nome da classe único
+
+        $template = <<<EOT
+<?php
+
+namespace App\Config\src\Migrations;
+
+use App\Config\src\Migration;
+
+class {$className} extends Migration {
+    public function up() {
+        // Adicione seu código de migração aqui
+    }
+
+    public function down() {
+        // Adicione seu código de rollback aqui
+    }
+}
+EOT;
+
+        file_put_contents($filename, $template);
+        echo "Migration created: $filename\n";
+
+        break;
+
+    case 'migrate':
+        $db = new Database();
+
+        loadMigrations();
+
+        $db->execute("CREATE TABLE IF NOT EXISTS migrations (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            migration VARCHAR(255) NOT NULL,
+            batch INT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )");
+
+        $migrations = glob(__DIR__ . '/app/Config/src/Migrations/*.php');
+
+        foreach ($migrations as $migration) {
+            require_once $migration;
+            $migrationClass = basename($migration, '.php');
+            $migrationClassWithNamespace = "App\\Config\\src\\Migrations\\$migrationClass";
+            $stmt = $db->execute("SELECT * FROM migrations WHERE migration = ?", [$migrationClass]);
+            if ($stmt->rowCount() == 0) {
+                $migrationInstance = new $migrationClassWithNamespace();
+                $migrationInstance->up();
+                $db->execute("INSERT INTO migrations (migration, batch) VALUES (?, ?)", [$migrationClass, 1]);
+                echo "Migração {$migrationClass} aplicada com sucesso.\n";
+            }
+        }
+        break;
+
+    case 'rollback':
+        $db = new Database();
+
+        loadMigrations();
+
+        $stmt = $db->execute("SELECT * FROM migrations ORDER BY id DESC LIMIT 1");
+        $migration = $stmt->fetch();
+
+        if ($migration) {
+            $migrationClass = $migration['migration'];
+            $migrationClassWithNamespace = "App\\Config\\src\\Migrations\\$migrationClass";
+            $migrationInstance = new $migrationClassWithNamespace();
+            $migrationInstance->down();
+            $db->execute("DELETE FROM migrations WHERE migration = ?", [$migrationClass]);
+            echo "Migração {$migrationClass} revertida com sucesso.\n";
+        } else {
+            echo "Nenhuma migração para reverter.\n";
+        }
+        break;
+
+    default:
+        echo "Command not recognized: $command\n";
+        break;
+}

@@ -1,0 +1,29 @@
+Options All -Indexes
+RewriteEngine on
+
+RewriteCond %{QUERY_STRING} "script"
+RewriteRule  .* - [F]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ ./index.php [QSA,NC]
+
+<FilesMatch "\.env$">
+Deny from all
+</FilesMatch>
+
+<FilesMatch "\.env.example$">
+Deny from all
+</FilesMatch>
+
+<FilesMatch "\.lock$">
+Deny from all
+</FilesMatch>
+
+<FilesMatch "\.md$">
+Deny from all
+</FilesMatch>
+
+<FilesMatch "^(?!manifest\.json$).*\.json$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
