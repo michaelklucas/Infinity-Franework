@@ -1,0 +1,439 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+    {{status}}
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Nova Produto /</span> Produto</h4>
+
+    <ul class="nav nav-pills flex-column flex-md-row mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-building me-1"></i> Produto</a>
+        </li>
+    </ul>
+
+    <div class="card mb-4">
+        <div class="col-12 mb-4 p-4">
+
+            <form method="post" enctype="multipart/form-data">
+
+                <div id="step-1" class="content">
+                    <div class="content-header mb-3">
+                        <h6 class="mb-0">1. Detalhes</h6>
+                        <small>Detalhes do produto</small>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label">Nome <span style="color: red;">*</span></label>
+                            <input type="text" name="nome" id="cep" class="form-control" placeholder="Bolsa x"
+                                required />
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Preço <span style="color: red;">*</span></label>
+                            <input type="text" name="price" id="price" class="form-control" placeholder="R$ 150,00"
+                                required />
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">Quantidade em Estoque <span style="color: red;">*</span></label>
+                            <input type="number" name="stock" id="stock" class="form-control" placeholder="123"
+                                required />
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="category_id" class="form-label">Categoria <span
+                                    style="color: red;">*</span></label>
+                            <select class="form-control" name="category_id" id="category_id" required>
+                                <option disabled selected>Escolha uma opção</option>
+                                {{options}}
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <h5 class="card-header">Descrição <small>(descrição do produto)</small><span
+                                    style="color: red;"> *</span></h5>
+                            <div class="card-body">
+                                <div id="snow-toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font"></select>
+                                        <select class="ql-size"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold"><i class="fas fa-bold"></i></button>
+                                        <button class="ql-italic"><i class="fas fa-italic"></i></button>
+                                        <button class="ql-underline"><i class="fas fa-underline"></i></button>
+                                        <button class="ql-strike"><i class="fas fa-strikethrough"></i></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color"></select>
+                                        <select class="ql-background"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub">Sub</button>
+                                        <button class="ql-script" value="super">Super</button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-header" value="1">H1</button>
+                                        <button class="ql-header" value="2">H2</button>
+                                        <button class="ql-blockquote"><i class="fas fa-quote-right"></i></button>
+                                        <button class="ql-code-block"><i class="fas fa-code"></i></button>
+                                    </span>
+                                </div>
+                                <div id="snow-editor">
+                                    <h1>Descrição completa</h1>
+                                    <p>Coloque a descrição completa do seu produto, seja criativo :)</p>
+                                </div>
+                                <input type="hidden" id="editor-content" name="descricao" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="hr">
+                </div>
+
+
+
+                <div id="step-1" class="content">
+                    <div class="row g-3">
+
+                        <div class="content-header mb-3">
+                            <h6 class="mb-0">2. Envio</h6>
+                            <small>Detalhes de Envio</small>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="form-label">Comprimento <span style="color: red;">*</span></label>
+                            <input type="text" name="comprimento" id="comprimento" class="form-control" placeholder="CM"
+                                required />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="form-label">Largura <span style="color: red;">*</span></label>
+                            <input type="text" name="largura" id="largura" class="form-control" placeholder="CM"
+                                required />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="form-label">Altura <span style="color: red;">*</span></label>
+                            <input type="text" name="altura" id="altura" class="form-control" placeholder="CM"
+                                required />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="form-label">Peso <span style="color: red;">*</span></label>
+                            <input type="text" name="peso" id="peso" class="form-control" placeholder="KG" required />
+                        </div>
+                    </div>
+
+
+
+                    <hr class="hr">
+                </div>
+
+
+
+
+
+                <div id="step-3" class="content">
+                    <div class="content-header mb-3">
+                        <h6 class="mb-0">3. Variantes</h6>
+                        <small>Detalhes de variantes</small>
+                    </div>
+                    <div class="row g-3">
+                        <h6>Variantes do produto</h6>
+                        <div class="card-body">
+                            <div class="form-repeater">
+                                <div class="row" id="campo1">
+                                    <div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">
+                                        <label class="form-label" for="form-repeater-1">Tamanho <span
+                                                style="color: red;">*</span></label>
+                                        <input name="variants[size][]" type="text" id="form-repeater-1"
+                                            class="form-control" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">
+                                        <label class="form-label" for="form-repeater-1">Cor <span
+                                                style="color: red;">*</span></label>
+                                        <input name="variants[color][]" type="color" id="form-repeater-1"
+                                            class="form-control" required>
+                                    </div>
+
+                                    <div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">
+                                        <label class="form-label" for="form-repeater-1">Estoque <span
+                                                style="color: red;">*</span></label>
+                                        <input name="variants[stock][]" type="number" id="form-repeater-1"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div id="camposDinamicos">
+                                </div>
+                                <div class="mb-0">
+                                    <button type="button" class="btn btn-primary" type="button"
+                                        onclick="adicionarCampo()">
+                                        <i class="bx bx-plus"></i>
+                                        <span class="align-middle">Adicionar Variante</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="hr">
+                        <h6>4. Site</h6>
+                        <div class="col-sm-6">
+                            <label class="switch">
+                                <input type="checkbox" name="exibir" class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">Exibir produto no meu site?</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Tipo destaque site</label>
+                            <select class="form-control" name="destaque">
+                                <option disabled selected>Escolha uma opção</option>
+                                <option value="1">Simples</option>
+                                <option value="2">Destaque</option>
+                                <option value="3">Super Destaque</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <hr class="hr">
+                <!-- Anotações -->
+                <div id="step-4" class="content">
+                    <div class="content-header mb-3">
+                        <h6 class="mb-0">5. Imagens</h6>
+                        <small>Demosntração dos produtos</small>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <div class="upload-container" id="upload-container">
+                                    <span class="upload-text">Solte os arquivos aqui ou clique para fazer upload da
+                                        imagens</span>
+                                    <input type="file" id="file-input" multiple />
+                                    <div class="preview-container" id="preview-container"></div>
+                                </div>
+                                <div id="upload-form">
+                                    <div id="hidden-inputs"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-12 d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success" type="button">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+    <script>
+        document.getElementById('file-input').addEventListener('change', handleFileSelect);
+        document.getElementById('upload-container').addEventListener('click', (event) => {
+            if (event.target === document.getElementById('upload-container')) {
+                document.getElementById('file-input').click();
+            }
+        });
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('preview-container');
+            const hiddenInputsContainer = document.getElementById('hidden-inputs');
+            const uploadContainer = document.getElementById('upload-container');
+
+            if (files.length > 0) {
+                uploadContainer.classList.add('hidden');
+            } else {
+                uploadContainer.classList.remove('hidden');
+            }
+
+            Array.from(files).forEach((file) => {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const preview = document.createElement('div');
+                    preview.classList.add('preview');
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.classList.add('remove-button');
+                    removeButton.textContent = 'X';
+                    removeButton.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        preview.remove();
+                        hiddenInput.remove();
+                        if (!previewContainer.hasChildNodes()) {
+                            uploadContainer.classList.remove('hidden');
+                            document.getElementById('file-input').value = '';
+                        }
+                    });
+
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'files[]';
+                    hiddenInput.value = e.target.result;
+
+                    preview.appendChild(img);
+                    preview.appendChild(removeButton);
+                    previewContainer.appendChild(preview);
+                    hiddenInputsContainer.appendChild(hiddenInput);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            document.getElementById('file-input').value = '';
+        }
+        const drake = dragula([document.getElementById('preview-container')]);
+        drake.on('drop', (el, target, source, sibling) => {
+            updateHiddenInputsOrder();
+        });
+
+        function updateHiddenInputsOrder() {
+            const previewContainer = document.getElementById('preview-container');
+            const hiddenInputsContainer = document.getElementById('hidden-inputs');
+            const previews = previewContainer.getElementsByClassName('preview');
+            const inputs = hiddenInputsContainer.getElementsByTagName('input');
+            const newOrder = [];
+
+            Array.from(previews).forEach(preview => {
+                const imgSrc = preview.getElementsByTagName('img')[0].src;
+                for (let i = 0; i < inputs.length; i++) {
+                    if (inputs[i].value === imgSrc) {
+                        newOrder.push(inputs[i]);
+                        break;
+                    }
+                }
+            });
+
+            hiddenInputsContainer.innerHTML = '';
+            newOrder.forEach(input => hiddenInputsContainer.appendChild(input));
+        }
+
+        var controleCampo = 1;
+
+        function adicionarCampo() {
+            controleCampo++;
+
+
+            var novoCampoHTML = '<div class="row" id="campo' + controleCampo + '">'
+                + '<div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">'
+                + '<label class="form-label" for="form-repeater-' + controleCampo + '">Tamanho <span style="color: red;">*</span></label>'
+                + '<input name="variants[size][]" type="text" id="form-repeater-' + controleCampo + '" class="form-control" required>'
+                + '</div>'
+                + '<div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">'
+                + '<label class="form-label" for="form-repeater-' + controleCampo + '">Cor <span style="color: red;">*</span>'
+                + '</label>'
+                + '<input name="variants[color][]" type="color" id="form-repeater-' + controleCampo + '" class="form-control" requiered>'
+                + '</div>'
+                + '<div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">'
+                + '<label class="form-label" for="form-repeater-' + controleCampo + '">Estoque <span style="color: red;">*</span>'
+                + '</label>'
+                + '<input name="variants[stock][]" type="number" id="form-repeater-' + controleCampo + '" class="form-control" requiered>'
+                + '</div>'
+                + '<div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'
+                + '<button type="button" class="btn btn-label-danger mt-4" type="button" onclick="removerCampo(' + controleCampo + ')">'
+                + '<i class="bx bx-x"></i><span class="align-middle">Apagar</span></button>'
+                + '</div>'
+                + '</div>';
+
+
+            document.getElementById('camposDinamicos').insertAdjacentHTML('beforeend', novoCampoHTML);
+
+        }
+
+        function removerCampo(idCampo) {
+            document.getElementById('campo' + idCampo).remove();
+        }
+
+        function formatCurrency(value) {
+            value = value.replace(/\D/g, '');
+            if (value) {
+                value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
+                value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else {
+                value = '';
+            }
+            return value;
+        }
+
+
+        function formatCM(value) {
+            value = value.replace(/\D/g, ''); // Remove todos os caracteres que não são números
+            if (value) {
+                value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ','); // Divide por 100 para obter a formatação correta (12,34)
+                value += ' CM'; // Adiciona ' CM' ao final do valor
+            } else {
+                value = '';
+            }
+            return value;
+        }
+
+
+        function formatKG(value) {
+    value = value.replace(/\D/g, ''); // Remove todos os caracteres que não são números
+    if (value) {
+        value = (parseInt(value, 10) / 1000).toFixed(3).replace('.', ','); // Divide por 1000 para converter gramas para kg
+        value += ' KG'; // Adiciona ' KG' ao final do valor formatado
+    } else {
+        value = '';
+    }
+    return value;
+}
+
+
+
+        function addCurrencyFormatter(id) {
+            document.getElementById(id).addEventListener('input', function (e) {
+                e.target.value = formatCurrency(e.target.value);
+            });
+        }
+
+        function addCMFormatter(id) {
+            document.getElementById(id).addEventListener('input', function (e) {
+                e.target.value = formatCM(e.target.value);
+            });
+        }
+
+        function addKGFormatter(id) {
+            document.getElementById(id).addEventListener('input', function (e) {
+                e.target.value = formatKG(e.target.value);
+            });
+        }
+
+
+        addCurrencyFormatter('price');
+
+        addCMFormatter('comprimento');
+        addCMFormatter('largura');
+        addCMFormatter('altura');
+        addKGFormatter('peso');
+
+
+        function validarSelects() {
+            const selects = document.querySelectorAll('select');
+            let allValid = true;
+
+            selects.forEach(select => {
+                if (!select.value.trim()) {
+                    allValid = false;
+                    select.classList.add('is-invalid');
+                } else {
+                    select.classList.remove('is-invalid');
+                }
+            });
+
+            return allValid;
+        }
+
+
+    </script>
+
+</div>

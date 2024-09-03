@@ -1,41 +1,100 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" class="light-style " dir="ltr" data-theme="theme-default" data-assets-path="{{URL}}/resources/view/assets/"
+      data-template="horizontal-menu-template">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
+      <meta charset="utf-8" />
+      <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+      <title>{{title}}</title>
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="{{description}}">
-  <meta name="keywords" content="{{keywords}}">
-  <meta name="author" content="{{author}}">
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="{{title}}">
-  <meta property="og:description" content="{{description}}">
-  <meta property="og:image" content="{{image}}">
-  <meta property="og:url" content="{{url}}">
-  <meta property="og:type" content="website">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Linkado - Sistema de Ponto Online">
+      <meta name="keywords" content="ponto online, sistema de ponto, controle de ponto, gestão de ponto">
+      <meta name="author" content="Linkado - linkando pessoas">
 
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{title}}">
-  <meta name="twitter:description" content="{{description}}">
-  <meta name="twitter:image" content="{{image}}">
-  <meta name="twitter:url" content="{{url}}">
+      <meta property="og:title" content="Linkado - Sistema de Ponto Online">
+      <meta property="og:description"
+            content="Facilite a gestão de ponto da sua equipe com o Linkado, um sistema de ponto online eficiente.">
+      <meta property="og:image" content="{{URL}}/resources/view/assets/img/favicon/logo.png">
+      <meta property="og:url" content="{{URL}}">
 
-  <!-- Example CSS Link -->
-  <link rel="stylesheet" href="https://example.com/css/infinity.css">
+      <meta name="robots" content="index, follow">
+      <meta name="googlebot" content="index, follow">
+      <meta name="revisit-after" content="7 days">
 
-  <!-- Example JavaScript Link -->
-  <script src="https://example.com/js/infinity.js" defer></script>
+
+      <link rel="icon" type="image/x-icon" href="{{URL}}/resources/view/assets/img/favicon/favico.ico" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/fonts/boxicons.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/fonts/fontawesome.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/fonts/flag-icons.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/css/rtl/core.css"
+            class="template-customizer-core-css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/css/rtl/theme-default.css"
+            class="template-customizer-theme-css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/dropzone/dropzone.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/css/style.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/typeahead-js/typeahead.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/flatpickr/flatpickr.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/select2/select2.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/css/pages/notfound.css" />
+      <link rel="stylesheet"
+            href="{{URL}}/resources/view/assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/fullcalendar/fullcalendar.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/bs-stepper/bs-stepper.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/quill/typography.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/quill/editor.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.css">
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/js/template-customizer.js" />
+      <script src="{{URL}}/resources/view/assets/vendor/js/helpers.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/config.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/dropzone/dropzone.js"></script>
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/vendor/libs/apex-charts/apex-charts.css" />
+      <link rel="stylesheet" href="{{URL}}/resources/view/assets/css/chat.css" />
 </head>
 
 <body>
-  {{header}}
-  {{content}}
-  {{footer}}
+      {{header}}
+      <div class="container-xxl flex-grow-1 container-p-y">
+            {{content}}
+      </div>
+      {{footer}}
+
+      <script src="{{URL}}/resources/view/assets/js/app-chat.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/forms-file-upload.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/jquery/jquery.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/popper/popper.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/js/bootstrap.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/hammer/hammer.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/i18n/i18n.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/js/menu.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/select2/select2.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/main.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/form-wizard-numbered.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/form-wizard-validation.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/quill/katex.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/quill/quill.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/forms-editors.js"></script>
+      <script src="{{URL}}/resources/view/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+      <script src="{{URL}}/resources/view/assets/js/dashboards-analytics.js"></script>
+
 </body>
 
 </html>

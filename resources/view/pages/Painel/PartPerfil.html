@@ -1,0 +1,35 @@
+<input type="hidden" value="{{id}}" name="id">
+<div class="row">
+    <div class="mb-3 col-md-6">
+        <label for="nome" class="form-label">Nome</label>
+        <input
+                class="form-control"
+                type="text"
+                id="nome"
+                name="nome"
+                value="{{name}}"
+                autofocus
+        />
+
+    </div>
+    <div class="mb-3 col-md-6">
+        <label for="senha" class="form-label">Senha</label>
+        <input class="form-control" type="text" name="senha" id="senha" placeholder="Senha" value="{{senha}}"/>
+    </div>
+    <div class="mb-3 col-md-6">
+        <label for="email" class="form-label">E-mail</label>
+        <input
+                class="form-control"
+                type="text"
+                id="email"
+                name="email"
+                value="{{email}}"
+                />
+    </div>
+   
+
+</div>
+<div class="mt-2">
+    <button type="submit" class="btn btn-primary me-2">Salvar</button>
+    <button type="reset" class="btn btn-outline-secondary">Cancelar</button>
+</div>

@@ -1,5 +1,5 @@
 {
-    "name": "tessinfinity/infinity",
+    "name": "mokosite/mokosite",
     "autoload": {
         "psr-4": {
             "App\\":"app/",

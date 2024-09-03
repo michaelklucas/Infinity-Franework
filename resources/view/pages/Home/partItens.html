@@ -1,0 +1,242 @@
+<form method="post">
+    <tr>
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1">{{nome}}</span>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1"><span
+                            class="fw-medium text-nowrap badge bg-label-success">{{dia_da_semana}}</span></span>
+                    <input type="hidden" value="{{id}}" name="{{id}}" />
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1">{{data}}</span>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1">{{entrada_manha}}</span>
+                    <small class="text-warning text-nowrap fw-semibold">{{modificado1}}</small>
+                    <small class="text-warning text-nowrap fw-semibold">{{atraso1}}</small>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1">{{saida_almoco}}</span>
+                    <small class="text-warning text-nowrap fw-semibold">{{modificado2}}</small>
+                    <small class="text-warning text-nowrap fw-semibold">{{atraso2}}</small>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1">{{entrada_tarde}}</span>
+                    <small class="text-warning text-nowrap fw-semibold">{{modificado3}}</small>
+                    <small class="text-warning text-nowrap fw-semibold">{{atraso3}}</small>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1">{{saida_tarde}}</span>
+                    <small class="text-warning text-nowrap fw-semibold">{{modificado4}}</small>
+                    <small class="text-warning text-nowrap fw-semibold">{{atraso4}}</small>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold lh-1"><span
+                            class="text-nowrap badge bg-label-info">{{tempo_trabalhado}}</span></span>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="dropdown">
+                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                        data-bs-target="#modalToggleEditar{{idLimpo}}"><i class="bx bx-edit me-1"></i>Ajustar
+                        ponto</button>
+
+                    <button class="dropdown-item" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasEnd{{idLimpo}}" aria-controls="offcanvasEnd"><i
+                            class="bx bx-images me-1"></i>Ver
+                        Imagens</button>
+                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalToggle"
+                        onclick="abrirMapaComCoordenadas({{latitude}}, {{longitude}})"><i class="bx bx-map me-1"></i>Ver
+                        Localização</button>
+                </div>
+            </div>
+        </td>
+    </tr>
+</form>
+
+
+<form action="" id="form" method="post">
+    <div class="modal fade" id="modalToggleEditar{{idLimpo}}" aria-labelledby="modalToggleLabel" tabindex="-1"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalToggleLabel">Edição de ponto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="{{id}}" name="id">
+                    <div class="row">
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Entrada manhã</label>
+                            <input class="form-control" type="time" name="manha" value="{{entrada_manha}}" autofocus />
+                        </div>
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Obs:</label>
+                            <input class="form-control" type="text" name="entrada_manha_obs" id="entrada_manha_obs"
+                                value="{{entrada_manha_obs}}" disabled />
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Entrada manhã original</label>
+                            <input class="form-control" type="time" name="entrada_manha_or" id="entrada_manha_or"
+                                value="{{entrada_manha_or}}" disabled />
+                        </div>
+
+
+
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Saida almoço</label>
+                            <input class="form-control" type="time" name="saida_almoco" placeholder="Saida Almoco"
+                                value="{{saida_almoco}}" />
+                        </div>
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Obs:</label>
+                            <input class="form-control" type="text" name="saida_almoco_obs" id="saida_almoco_obs"
+                                value="{{saida_almoco_obs}}" disabled />
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Saida almoço original</label>
+                            <input class="form-control" type="time" name="saida_almoco_or" id="saida_almoco_or"
+                                value="{{saida_almoco_or}}" disabled />
+                        </div>
+
+
+
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Entrada Tarde</label>
+                            <input class="form-control" type="time" name="entrada_tarde" value="{{entrada_tarde}}" />
+                        </div>
+
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Obs:</label>
+                            <input class="form-control" type="text" name="entrada_tarde_obs" id="entrada_tarde_obs"
+                                value="{{entrada_tarde_obs}}" disabled />
+                        </div>
+
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Entrada Tarde original</label>
+                            <input class="form-control" type="time" name="entrada_tarde_or" id="entrada_tarde_or"
+                                value="{{entrada_tarde_or}}" disabled />
+                        </div>
+
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Saida Tarde</label>
+                            <input class="form-control" type="time" name="saida_tarde" value="{{saida_tarde}}" />
+                        </div>
+
+
+
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label">Obs:</label>
+                            <input class="form-control" type="text" name="saida_tarde_obs" id="saida_tarde_obs"
+                                value="{{saida_tarde_obs}}" disabled />
+                        </div>
+
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Saida Tarde original</label>
+                            <input class="form-control" type="time" name="saida_tarde_or" id="saida_tarde_or"
+                                value="{{saida_tarde_or}}" disabled />
+                        </div>
+
+
+                        <div class="mb-3 col-md-12">
+                            <label class="form-label">Justificativa</label>
+                            <input class="form-control" type="text" name="justificativa"
+                                placeholder="Justificativa para fins de analise" required />
+                        </div>
+
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary me-2">Salvar</button>
+                    </div>
+                </div>
+
+                <input type="hidden" name="entrada_manha_obs_hidden" id="entrada_manha_obs_hidden" />
+                <input type="hidden" name="entrada_manha_or_hidden" id="entrada_manha_or_hidden" />
+                <input type="hidden" name="saida_almoco_obs_hidden" id="saida_almoco_obs_hidden" />
+                <input type="hidden" name="saida_almoco_or_hidden" id="saida_almoco_or_hidden" />
+                <input type="hidden" name="entrada_tarde_obs_hidden" id="entrada_tarde_obs_hidden" />
+                <input type="hidden" name="entrada_tarde_or_hidden" id="entrada_tarde_or_hidden" />
+                <input type="hidden" name="saida_tarde_obs_hidden" id="saida_tarde_obs_hidden" />
+                <input type="hidden" name="saida_tarde_or_hidden" id="saida_tarde_or_hidden" />
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById('form').addEventListener('submit', function () {
+        document.getElementById('entrada_manha_obs_hidden').value = document.getElementById('entrada_manha_obs').value;
+        document.getElementById('entrada_manha_or_hidden').value = document.getElementById('entrada_manha_or').value;
+        document.getElementById('saida_almoco_obs_hidden').value = document.getElementById('saida_almoco_obs').value;
+        document.getElementById('saida_almoco_or_hidden').value = document.getElementById('saida_almoco_or').value;
+        document.getElementById('entrada_tarde_obs_hidden').value = document.getElementById('entrada_tarde_obs').value;
+        document.getElementById('entrada_tarde_or_hidden').value = document.getElementById('entrada_tarde_or').value;
+        document.getElementById('saida_tarde_obs_hidden').value = document.getElementById('saida_tarde_obs').value;
+        document.getElementById('saida_tarde_or_hidden').value = document.getElementById('saida_tarde_or').value;
+    });
+</script>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd{{idLimpo}}" aria-labelledby="offcanvasEndLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasEndLabel" class="offcanvas-title">Fotos do mês</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body my-auto mx-0 flex-grow-0 row">
+        {{fotos}}
+    </div>
+</div>

@@ -11,17 +11,20 @@ class Login
         }
     }
 
-
     public static function login($user)
     {
         self::initSession();
+
         $_SESSION['usuarios'] = [
             'id' => $user->id,
             'nome' => $user->nome,
             'email' => $user->email,
-            'pro' => $user->pro
+            'usuarioCode' => $user->cod_user,
+            'pro' => $user->pro,
+            'empresa' => $user->empresa,
+            'codEmpresa' => $user->cod_empresa,
+            'login_time' => time()
         ];
-
         return true;
     }
 
@@ -37,5 +40,5 @@ class Login
         unset($_SESSION['usuarios']);
         return true;
     }
-    
+
 }

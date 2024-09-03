@@ -1,0 +1,248 @@
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row g-4 mb-4">
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Usuarios Presentes</span>
+                            <div class="d-flex align-items-end mt-2">
+                                <h4 class="mb-0 me-2">{{online}}</h4>
+                            </div>
+                            <small>Total presente hoje</small>
+                        </div>
+                        <span class="badge bg-label-success rounded p-2">
+                            <i class="bx bx-dollar bx-sm"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Usuarios Faltantes</span>
+                            <div class="d-flex align-items-end mt-2">
+                                <h4 class="mb-0 me-2">{{faltas}}</h4>
+                            </div>
+                            <small>Total de faltas hoje</small>
+                        </div>
+                        <span class="badge bg-label-danger rounded p-2">
+                            <i class="bx bx-user-minus bx-sm"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Usuarios em Férias</span>
+                            <div class="d-flex align-items-end mt-2">
+                                <h4 class="mb-0 me-2">{{ferias}}</h4>
+                            </div>
+                            <small>Total usuarios em Férias</small>
+                        </div>
+                        <span class="badge bg-label-warning rounded p-2">
+                            <i class="bx bx-user-voice bx-sm"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card">
+        <div class="row g-4">
+            <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
+                <div class="card-body">
+                    <div class="col-md-6 col-6 mb-4">
+                        <label for="dateRangePicker" class="form-label">Range de datas</label>
+                        <form method="get">
+                            <div class="input-group input-daterange" id="bs-datepicker-daterange">
+                                <input type="date" id="dateRangePicker" placeholder="YYYY-MM-DD" name="de" class="form-control" />
+                                <span class="input-group-text">Até</span>
+                                <input type="date" placeholder="YYYY-MM-DD" name="ate" class="form-control" />
+                                <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+
+                    <hr class="my-4 mx-n4" />
+
+                    <div class="table-responsive text-nowrap">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Dia / semana</th>
+                                    <th>Data</th>
+                                    <th>Entrada</th>
+                                    <th>Saída</th>
+                                    <th>Entrada</th>
+                                    <th>Saída</th>
+                                    <th>Tempo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="table-border-bottom-0">
+                                {{itens}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr class="my-4 mx-n4" />
+                    {{pagination}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" tabindex="-1" style="display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalToggleLabel">Localização de Colaborador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="map" style="height: 400px;"></div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date();
+    const pastTwoMonths = new Date();
+    pastTwoMonths.setMonth(today.getMonth() - 2);
+
+    const minDate = pastTwoMonths.toISOString().split('T')[0]; // Data de dois meses atrás
+    const maxDate = today.toISOString().split('T')[0]; // Data de hoje
+
+    const dateInputStart = document.querySelector('input[name="de"]');
+    const dateInputEnd = document.querySelector('input[name="ate"]');
+
+    // Define o intervalo permitido para o campo "de"
+    dateInputStart.setAttribute('min', minDate);
+    dateInputStart.setAttribute('max', maxDate);
+
+    // Define o intervalo permitido para o campo "ate"
+    dateInputEnd.setAttribute('min', minDate);
+    dateInputEnd.setAttribute('max', maxDate);
+
+    // Adiciona um evento para garantir que a data final não seja anterior à data inicial
+    dateInputStart.addEventListener('change', function () {
+        const startDate = new Date(dateInputStart.value);
+        const endDate = new Date(dateInputEnd.value);
+
+        if (startDate > endDate) {
+            dateInputEnd.value = dateInputStart.value;
+        }
+
+        dateInputEnd.setAttribute('min', dateInputStart.value);
+    });
+
+    dateInputEnd.addEventListener('change', function () {
+        const startDate = new Date(dateInputStart.value);
+        const endDate = new Date(dateInputEnd.value);
+
+        if (startDate > endDate) {
+            dateInputStart.value = dateInputEnd.value;
+        }
+    });
+});
+
+    </script>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("verLocalizacaoButton").addEventListener("click", function () {
+                abrirMapaComCoordenadas(latitude, longitude);
+            });
+        });
+    
+        var mapaLatitude;
+        var mapaLongitude;
+        var map;
+    
+        function abrirMapaComCoordenadas(latitude, longitude) {
+            mapaLatitude = latitude;
+            mapaLongitude = longitude;
+            document.getElementById("modalToggle").style.display = "block";
+            inicializarMapa();
+        }
+    
+        function inicializarMapa() {
+            var latitude = parseFloat(mapaLatitude);
+            var longitude = parseFloat(mapaLongitude);
+    
+            if (typeof map === "undefined") {
+                map = L.map("map").setView([latitude, longitude], 15);
+    
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+            } else {
+                map.setView([latitude, longitude], 15);
+            }
+            const marker = L.marker([latitude, longitude]).addTo(map)
+                .bindPopup("Localização, precisão de até 10 metros")
+                .openPopup();
+    
+            const circle = L.circle([latitude, longitude], {
+                color: '#38F094',
+                fillColor: '#38F094',
+                fillOpacity: 0.2,
+                radius: 100
+            }).addTo(map);
+    
+            const markerGroup = L.layerGroup([marker, circle]);
+    
+            map.fitBounds(markerGroup.getBounds());
+    
+            map.eachLayer(function (layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+    
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup("Localização, precisão de até 10 metros")
+                .openPopup();
+    
+            document.getElementsByClassName("close")[0].addEventListener("click", function () {
+                mapaLatitude = null;
+                mapaLongitude = null;
+                document.getElementById("modalToggle").style.display = "none";
+            });
+        }
+    </script>
+
+
+
+
+
+</div>

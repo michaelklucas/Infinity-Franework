@@ -10,7 +10,7 @@ class RequireUserLogin{
 
         if (!SessionLoginUsers::isLogged()) {
 
-            $request->getRouter()->redirect('/login');
+            $request->getRouter()->redirect('/');
         }
         return $next($request);
 

@@ -143,6 +143,21 @@ class Database{
     return $this->execute($query);
   }
 
+
+    public function selectInnerJoin($table1, $table2, $on, $where = null,  $order = null, $limit = null, $fields = '*'){
+        //DADOS DA QUERY
+        $where = $where !== null ? 'WHERE '.$where : '';
+        $order = $order !== null ? 'ORDER BY '.$order : '';
+        $limit = $limit !== null ? 'LIMIT '.$limit : '';
+
+        //MONTA A QUERY
+        $query = 'SELECT '.$fields.' FROM '.$table1.' INNER JOIN '.$table2.' ON '.$on.' '.$where.' '.$order.' '.$limit;
+
+        //EXECUTA A QUERY
+        return $this->execute($query);
+    }
+
+
     /**
    * Método responsável por executar atualizações no banco de dados
    * @param  string $where

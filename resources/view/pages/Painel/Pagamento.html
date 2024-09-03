@@ -1,0 +1,207 @@
+<div class="card mb-4">
+    <h5 class="card-header">Pagamentos</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form id="creditCardForm" class="row g-3" >
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input name="collapsible-payment" class="form-check-input" type="radio" value=""
+                                   id="collapsible-payment-cc" checked=""/>
+                            <label class="form-check-label" for="collapsible-payment-cc">Credito/Debito</label>
+                        </div>
+
+                    </div>
+                    <div class="col-9">
+                        <label class="form-label w-100" for="paymentCard">Numero do Cartão</label>
+                        <div class="input-group input-group-merge">
+                            <input id="paymentCard" name="paymentCard" class="form-control credit-card-mask" type="text"
+                                   placeholder="1356 3215 6548 7898" aria-describedby="paymentCard2"/>
+                            <span class="input-group-text cursor-pointer p-1" id="paymentCard2"><span
+                                    class="card-type"></span></span>
+                        </div>
+
+
+                    </div>
+                    <div class="col-3">
+
+
+                            <label for="country" class="form-label">Quantidade</label>
+                            <select id="country" class="form-select select2" name="country">
+                                <option selected>Selecione</option>
+                                <option>1x RS:xxxx</option>
+                                <option>2x RS:xxxx</option>
+                                <option>3x RS:xxxx</option>
+                                <option>4x RS:xxxx</option>
+                                <option>5x RS:xxxx</option>
+                                <option>6x RS:xxxx</option>
+                                <option>7x RS:xxxx</option>
+                                <option>8x RS:xxxx</option>
+                                <option>9x RS:xxxx</option>
+                                <option>10x RS:xxxx</option>
+                                <option>11x RS:xxxx</option>
+                                <option>12x RS:xxxx</option>
+                            </select>
+
+
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="paymentName">Nome</label>
+                        <input type="text" id="paymentName" class="form-control" placeholder="Nome como está no Cartão"/>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="form-label" for="paymentExpiryDate">Validade</label>
+                        <input type="text" id="paymentExpiryDate" class="form-control expiry-date-mask"
+                               placeholder="MM/YY"/>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="form-label" for="paymentCvv">CVV</label>
+                        <div class="input-group input-group-merge">
+                            <input type="text" id="paymentCvv" class="form-control cvv-code-mask" maxlength="3"
+                                   placeholder="654"/>
+                            <span class="input-group-text cursor-pointer" id="paymentCvv2"><i
+                                    class="bx bx-help-circle text-muted" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Codigo de Validação do Cartão"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input">
+                            <span class="switch-toggle-slider">
+                    <span class="switch-on"></span>
+                    <span class="switch-off"></span>
+                  </span>
+                            <span class="switch-label">Salvar cartão para cobrança futura?</span>
+                        </label>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Salvar</button>
+                        <button type="reset" class="btn btn-label-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 mt-5 mt-md-0">
+                <h6>Meus Cartões</h6>
+                <div class="added-cards">
+                    <div class="cardMaster bg-lighter rounded-2 p-3 mb-3">
+                        <div class="d-flex justify-content-between flex-sm-row flex-column">
+                            <div class="card-information me-2">
+                                <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                                    <h6 class="mb-0 me-2">Não Há cartões Salvos</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="cardMaster bg-lighter rounded-2 p-3 mb-3">
+                        <div class="d-flex justify-content-between flex-sm-row flex-column">
+                            <div class="card-information me-2">
+                                <img class="mb-3 img-fluid" src="{{URL}}/resources/view/assets/img/icons/payments/mastercard.png"
+                                     alt="Master Card">
+                                <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                                    <h6 class="mb-0 me-2">Tom McBride</h6>
+                                    <span class="badge bg-label-primary">Primary</span>
+                                </div>
+                                <span class="card-number">&#8727;&#8727;&#8727;&#8727; &#8727;&#8727;&#8727;&#8727; 9856</span>
+                            </div>
+                            <div class="d-flex flex-column text-start text-sm-end">
+                                <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3">
+                                    <button class="btn btn-label-primary me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editCCModal">Edit
+                                    </button>
+                                    <button class="btn btn-label-secondary">Delete</button>
+                                </div>
+                                <small class="mt-sm-auto mt-2 order-sm-1 order-0">Card expires at 12/26</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardMaster bg-lighter rounded-2 p-3">
+                        <div class="d-flex justify-content-between flex-sm-row flex-column">
+                            <div class="card-information me-2">
+                                <img class="mb-3 img-fluid" src="{{URL}}/resources/view/assets/img/icons/payments/visa.png"
+                                     alt="Visa Card">
+                                <h6 class="mb-1">Mildred Wagner</h6>
+                                <span class="card-number">&#8727;&#8727;&#8727;&#8727; &#8727;&#8727;&#8727;&#8727; 5896</span>
+                            </div>
+                            <div class="d-flex flex-column text-start text-sm-end">
+                                <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3">
+                                    <button class="btn btn-label-primary me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editCCModal">Edit
+                                    </button>
+                                    <button class="btn btn-label-secondary">Delete</button>
+                                </div>
+                                <small class="mt-sm-auto mt-2 order-sm-1 order-0">Card expires at 10/27</small>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                <!-- Modal -->
+                <!-- Add New Credit Card Modal -->
+                <div class="modal fade" id="editCCModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-simple modal-add-new-cc">
+                        <div class="modal-content p-3 p-md-5">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                <div class="text-center mb-4">
+                                    <h3>Edit Card</h3>
+                                    <p>Edit your saved card details</p>
+                                </div>
+                                <form id="editCCForm" class="row g-3" onsubmit="return false">
+                                    <div class="col-12">
+                                        <label class="form-label w-100" for="modalEditCard">Card Number</label>
+                                        <div class="input-group input-group-merge">
+                                            <input id="modalEditCard" name="modalEditCard"
+                                                   class="form-control credit-card-mask-edit" type="text"
+                                                   placeholder="4356 3215 6548 7898" value="4356 3215 6548 7898"
+                                                   aria-describedby="modalEditCard2"/>
+                                            <span class="input-group-text cursor-pointer p-1" id="modalEditCard2"><span
+                                                    class="card-type-edit"></span></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="modalEditName">Name</label>
+                                        <input type="text" id="modalEditName" class="form-control"
+                                               placeholder="John Doe" value="John Doe"/>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <label class="form-label" for="modalEditExpiryDate">Exp. Date</label>
+                                        <input type="text" id="modalEditExpiryDate"
+                                               class="form-control expiry-date-mask-edit" placeholder="MM/YY"
+                                               value="08/28"/>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <label class="form-label" for="modalEditCvv">CVV Code</label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="text" id="modalEditCvv" class="form-control cvv-code-mask-edit"
+                                                   maxlength="3" placeholder="654" value="XXX"/>
+                                            <span class="input-group-text cursor-pointer" id="modalEditCvv2"><i
+                                                    class="bx bx-help-circle text-muted" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Card Verification Value"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="switch">
+                                            <input type="checkbox" class="switch-input">
+                                            <span class="switch-toggle-slider">
+                <span class="switch-on"></span>
+                <span class="switch-off"></span>
+              </span>
+                                            <span class="switch-label">Set as primary card</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-primary me-sm-3 me-1 mt-3">Submit</button>
+                                        <button type="reset" class="btn btn-label-secondary mt-3"
+                                                data-bs-dismiss="modal" aria-label="Close">Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
