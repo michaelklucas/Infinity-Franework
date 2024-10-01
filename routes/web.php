@@ -140,25 +140,69 @@ $obRouter->post('/AdicionarCategorias', [
 
 
 
-$obRouter->get('/AdicionarCupons', [
+$obRouter->get('/Cupons', [
     'middlewares' => [
         'require-usuarios-login',
         'empresa'
     ],
     function ($request) {
-        return new Response(200, Pages\Categorias::getAdicionarCupons($request));
+        return new Response(200, Pages\Cupons::getAdicionarCupons($request));
     }
 ]);
 
-$obRouter->post('/AdicionarCupons', [
+$obRouter->post('/Cupons', [
     'middlewares' => [
         'require-usuarios-login',
         'empresa'
     ],
     function ($request) {
-        return new Response(200, Pages\Categorias::postAdicionarCupons($request));
+        return new Response(200, Pages\Cupons::postAdicionarCupons($request));
     }
 ]);
+
+
+
+$obRouter->get('/Produtos', [
+    'middlewares' => [
+        'require-usuarios-login',
+        'empresa'
+    ],
+    function ($request) {
+        return new Response(200, Pages\Produtos::getProdutos($request));
+    }
+]);
+
+$obRouter->post('/Produtos', [
+    'middlewares' => [
+        'require-usuarios-login',
+        'empresa'
+    ],
+    function ($request) {
+        return new Response(200, Pages\Produtos::postProdutos($request));
+    }
+]);
+
+$obRouter->get('/edit/{id}', [
+    'middlewares' => [
+        'require-usuarios-login',
+        'empresa'
+    ],
+    function ($request, $id) {
+        return new Response(200, Pages\EditarProdutos::getEditarProdutos($request, $id));
+    }
+]);
+
+$obRouter->post('/edit/{id}', [
+    'middlewares' => [
+        'require-usuarios-login',
+        'empresa'
+    ],
+    function ($request, $id) {
+        return new Response(200, Pages\EditarProdutos::postEditarProdutos($request, $id));
+    }
+]);
+
+
 
 
 

@@ -14,35 +14,11 @@ class AdicionarProdutos extends Page
 
     public static function getAdicionarProdutos($request)
     {
-        $content = View::render('pages/Painel/AdicionarProdutos', [
+        $content = View::render('pages/Painel/Produtos', [
             'status' => '',
             'options' => self::getCategories()
         ]);
         return self::getPage(NAME_APP, $content);
-    }
-
-    public static function getDados($request)
-    {
-
-        $obDados = new EntityHome;
-        $dados = $obDados->DadosUser();
-        $dadosAdm = $obDados->DadosAdm();
-
-        if (empty($_SESSION['usuarios']['empresa'])) {
-            $content = View::render('pages/Home/DadosUser', [
-                'faltas' => $dados['diasFaltasAteAtual'],
-                'diasTrabalhados' => $dados['diasTrabalhados'],
-            ]);
-        } else {
-
-            $content = View::render('pages/Home/Dados', [
-                'online' => $dadosAdm['online'],
-                'faltas' => $dadosAdm['faltas'],
-                'ferias' => $dadosAdm['ferias']
-            ]);
-        }
-
-        return $content;
     }
 
     public static function getCategories()
@@ -50,7 +26,7 @@ class AdicionarProdutos extends Page
 
         $obCategories = new Categories;
         $Categories = '';
-        
+
         $results = Categories::getCategories('id_tenant = "' . $_SESSION['usuarios']['codEmpresa'] . '"');
 
         while ($obCategories = $results->fetchObject(Categories::class)) {
@@ -74,10 +50,11 @@ class AdicionarProdutos extends Page
         $obDados->descricao = $postVars['descricao'];
         $obDados->category_id = $postVars['category_id'];
         $obDados->variants = $postVars['variants'];
-        $obDados->comprimento = $postVars['comprimento'];
-        $obDados->altura = $postVars['altura'];
-        $obDados->largura = $postVars['largura'];
-        $obDados->peso = $postVars['peso'];
+        $obDados->free = isset($postVars['free']) ? 1 : 0;
+        $obDados->comprimento = isset($postVars['comprimento']) ? $postVars['comprimento'] : '';
+        $obDados->altura = isset($postVars['altura']) ? $postVars['altura'] : '';
+        $obDados->largura = isset($postVars['largura']) ? $postVars['largura'] : '';
+        $obDados->peso = isset($postVars['peso']) ? $postVars['peso'] : '';
         $obDados->exibir = isset($postVars['exibir']) ? 1 : 0;
         $obDados->destaque = isset($postVars['destaque']) ? 1 : 0;
         $obDados->files = $postVars['files'];
@@ -88,7 +65,7 @@ class AdicionarProdutos extends Page
             $status = status::renderMensagem('Erro ao cadastrar!', 'danger');
         }
 
-        $content = View::render('pages/Painel/AdicionarProdutos', [
+        $content = View::render('pages/Painel/Produtos', [
             'status' => $status
         ]);
         return self::getPage(NAME_APP, $content);

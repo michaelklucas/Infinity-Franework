@@ -4,6 +4,8 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <div class="container-xxl flex-grow-1 container-p-y">
+
+
     <div class="row g-4 mb-4">
         <div class="col-sm-6 col-xl-4">
             <div class="card">
@@ -129,7 +131,7 @@
         </div>
     </div>
     
-    
+</div>
 
 
     <script>
@@ -175,74 +177,3 @@
 });
 
     </script>
-    
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("verLocalizacaoButton").addEventListener("click", function () {
-                abrirMapaComCoordenadas(latitude, longitude);
-            });
-        });
-    
-        var mapaLatitude;
-        var mapaLongitude;
-        var map;
-    
-        function abrirMapaComCoordenadas(latitude, longitude) {
-            mapaLatitude = latitude;
-            mapaLongitude = longitude;
-            document.getElementById("modalToggle").style.display = "block";
-            inicializarMapa();
-        }
-    
-        function inicializarMapa() {
-            var latitude = parseFloat(mapaLatitude);
-            var longitude = parseFloat(mapaLongitude);
-    
-            if (typeof map === "undefined") {
-                map = L.map("map").setView([latitude, longitude], 15);
-    
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(map);
-            } else {
-                map.setView([latitude, longitude], 15);
-            }
-            const marker = L.marker([latitude, longitude]).addTo(map)
-                .bindPopup("Localização, precisão de até 10 metros")
-                .openPopup();
-    
-            const circle = L.circle([latitude, longitude], {
-                color: '#38F094',
-                fillColor: '#38F094',
-                fillOpacity: 0.2,
-                radius: 100
-            }).addTo(map);
-    
-            const markerGroup = L.layerGroup([marker, circle]);
-    
-            map.fitBounds(markerGroup.getBounds());
-    
-            map.eachLayer(function (layer) {
-                if (layer instanceof L.Marker) {
-                    map.removeLayer(layer);
-                }
-            });
-    
-            L.marker([latitude, longitude]).addTo(map)
-                .bindPopup("Localização, precisão de até 10 metros")
-                .openPopup();
-    
-            document.getElementsByClassName("close")[0].addEventListener("click", function () {
-                mapaLatitude = null;
-                mapaLongitude = null;
-                document.getElementById("modalToggle").style.display = "none";
-            });
-        }
-    </script>
-
-
-
-
-
-</div>

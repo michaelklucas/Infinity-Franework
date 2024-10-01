@@ -20,6 +20,7 @@ class AdicionarProdutos
     public $altura;
     public $largura;
     public $peso;
+    public $free;
 
     public function cadastrar()
     {
@@ -35,6 +36,7 @@ class AdicionarProdutos
         $cleanedWeight = floatval(str_replace('KG', '', str_replace(',', '.', $this->peso)));
 
         $this->id = $dbProducts->insert([
+            'id_tenant' => $_SESSION['usuarios']['codEmpresa'],
             'name' => $this->nome,
             'price' => $formattedPrice,
             'stock' => $this->stock,
@@ -43,6 +45,7 @@ class AdicionarProdutos
             'exibir' => $this->exibir,
             'destaque' => $this->destaque,
             'comprimento' => $cleanedLength,
+            'free' => $this->free,
             'largura' => $cleanedWidth,
             'altura' => $cleanedHeight,
             'peso' => $cleanedWeight

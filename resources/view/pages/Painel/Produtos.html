@@ -82,50 +82,48 @@
                                 <input type="hidden" id="editor-content" name="descricao" required>
                             </div>
                         </div>
-
                     </div>
-
                     <hr class="hr">
                 </div>
 
-
-
                 <div id="step-1" class="content">
                     <div class="row g-3">
-
                         <div class="content-header mb-3">
                             <h6 class="mb-0">2. Envio</h6>
                             <small>Detalhes de Envio</small>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
+                            <label class="switch">
+                                <input type="checkbox" name="free" id="freeShipping" class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">Frete Grátis?</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
                             <label class="form-label">Comprimento <span style="color: red;">*</span></label>
                             <input type="text" name="comprimento" id="comprimento" class="form-control" placeholder="CM"
                                 required />
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label class="form-label">Largura <span style="color: red;">*</span></label>
                             <input type="text" name="largura" id="largura" class="form-control" placeholder="CM"
                                 required />
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label class="form-label">Altura <span style="color: red;">*</span></label>
                             <input type="text" name="altura" id="altura" class="form-control" placeholder="CM"
                                 required />
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label class="form-label">Peso <span style="color: red;">*</span></label>
                             <input type="text" name="peso" id="peso" class="form-control" placeholder="KG" required />
                         </div>
                     </div>
-
-
-
                     <hr class="hr">
                 </div>
-
-
-
-
 
                 <div id="step-3" class="content">
                     <div class="content-header mb-3">
@@ -233,6 +231,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
     <script>
         document.getElementById('file-input').addEventListener('change', handleFileSelect);
+       
         document.getElementById('upload-container').addEventListener('click', (event) => {
             if (event.target === document.getElementById('upload-container')) {
                 document.getElementById('file-input').click();
@@ -364,31 +363,27 @@
             return value;
         }
 
-
         function formatCM(value) {
-            value = value.replace(/\D/g, ''); // Remove todos os caracteres que não são números
+            value = value.replace(/\D/g, '');
             if (value) {
-                value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ','); // Divide por 100 para obter a formatação correta (12,34)
-                value += ' CM'; // Adiciona ' CM' ao final do valor
+                value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
+                value += ' CM';
             } else {
                 value = '';
             }
             return value;
         }
 
-
         function formatKG(value) {
-    value = value.replace(/\D/g, ''); // Remove todos os caracteres que não são números
-    if (value) {
-        value = (parseInt(value, 10) / 1000).toFixed(3).replace('.', ','); // Divide por 1000 para converter gramas para kg
-        value += ' KG'; // Adiciona ' KG' ao final do valor formatado
-    } else {
-        value = '';
-    }
-    return value;
-}
-
-
+            value = value.replace(/\D/g, '');
+            if (value) {
+                value = (parseInt(value, 10) / 1000).toFixed(3).replace('.', ',');
+                value += ' KG';
+            } else {
+                value = '';
+            }
+            return value;
+        }
 
         function addCurrencyFormatter(id) {
             document.getElementById(id).addEventListener('input', function (e) {
@@ -408,14 +403,11 @@
             });
         }
 
-
         addCurrencyFormatter('price');
-
         addCMFormatter('comprimento');
         addCMFormatter('largura');
         addCMFormatter('altura');
         addKGFormatter('peso');
-
 
         function validarSelects() {
             const selects = document.querySelectorAll('select');
@@ -429,11 +421,27 @@
                     select.classList.remove('is-invalid');
                 }
             });
-
             return allValid;
         }
 
+        document.getElementById('freeShipping').addEventListener('change', function () {
+            var comprimento = document.getElementById('comprimento');
+            var largura = document.getElementById('largura');
+            var altura = document.getElementById('altura');
+            var peso = document.getElementById('peso');
 
+            if (this.checked) {
+                comprimento.removeAttribute('required');
+                largura.removeAttribute('required');
+                altura.removeAttribute('required');
+                peso.removeAttribute('required');
+            } else {
+                comprimento.setAttribute('required', 'required');
+                largura.setAttribute('required', 'required');
+                altura.setAttribute('required', 'required');
+                peso.setAttribute('required', 'required');
+            }
+        });
     </script>
 
 </div>

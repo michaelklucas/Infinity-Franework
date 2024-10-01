@@ -168,14 +168,6 @@ display: block;
   display: block;
 }
 
-.alert-warning {
-  display: none;
-}
-
-.alert-warning.active {
-  display: block;
-}
-
 select:invalid {
       border: 1px solid red;
       outline: none;

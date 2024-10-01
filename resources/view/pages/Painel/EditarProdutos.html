@@ -1,0 +1,446 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+    {{status}}
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Editar Produto /</span> Produto</h4>
+
+    <ul class="nav nav-pills flex-column flex-md-row mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-building me-1"></i> Produto</a>
+        </li>
+    </ul>
+
+    <div class="card mb-4">
+        <div class="col-12 mb-4 p-4">
+
+            <form method="post" enctype="multipart/form-data">
+<input type="hidden" value="{{id}}" name="id"/>
+                <div id="step-1" class="content">
+                    <div class="content-header mb-3">
+                        <h6 class="mb-0">1. Detalhes</h6>
+                        <small>Detalhes do produto</small>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label">Nome <span style="color: red;">*</span></label>
+                            <input type="text" name="nome" id="cep" class="form-control" placeholder="Bolsa x" required
+                                value="{{nome}}" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Preço <span style="color: red;">*</span></label>
+                            <input type="text" name="price" id="price" class="form-control" placeholder="R$ 150,00"
+                                required value="{{price}}" />
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">Quantidade em Estoque <span style="color: red;">*</span></label>
+                            <input type="number" name="stock" id="stock" class="form-control" placeholder="123" required
+                                value="{{stock}}" />
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="category_id" class="form-label">Categoria <span
+                                    style="color: red;">*</span></label>
+                            <select class="form-control" name="category_id" id="category_id" required>
+                                <option disabled selected>Escolha uma opção</option>
+                                {{options}}
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <h5 class="card-header">Descrição <small>(descrição do produto)</small><span
+                                    style="color: red;"> *</span></h5>
+                            <div class="card-body">
+                                <div id="snow-toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font"></select>
+                                        <select class="ql-size"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold"><i class="fas fa-bold"></i></button>
+                                        <button class="ql-italic"><i class="fas fa-italic"></i></button>
+                                        <button class="ql-underline"><i class="fas fa-underline"></i></button>
+                                        <button class="ql-strike"><i class="fas fa-strikethrough"></i></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color"></select>
+                                        <select class="ql-background"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub">Sub</button>
+                                        <button class="ql-script" value="super">Super</button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-header" value="1">H1</button>
+                                        <button class="ql-header" value="2">H2</button>
+                                        <button class="ql-blockquote"><i class="fas fa-quote-right"></i></button>
+                                        <button class="ql-code-block"><i class="fas fa-code"></i></button>
+                                    </span>
+                                </div>
+                                <div id="snow-editor">
+                                    {{descricao}}
+                                </div>
+                                <input type="hidden" id="editor-content" name="descricao" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="hr">
+                </div>
+
+                <div id="step-1" class="content">
+                    <div class="row g-3">
+                        <div class="content-header mb-3">
+                            <h6 class="mb-0">2. Envio</h6>
+                            <small>Detalhes de Envio</small>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="switch">
+                                <input {{free}} type="checkbox" name="free" id="freeShipping" class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">Frete Grátis?</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="form-label">Comprimento <span style="color: red;">*</span></label>
+                            <input type="text" name="comprimento" id="comprimento" class="form-control" placeholder="CM"
+                                required value="{{comprimento}}" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="form-label">Largura <span style="color: red;">*</span></label>
+                            <input type="text" name="largura" id="largura" class="form-control" placeholder="CM"
+                                required value="{{largura}}" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="form-label">Altura <span style="color: red;">*</span></label>
+                            <input type="text" name="altura" id="altura" class="form-control" placeholder="CM" required
+                                value="{{altura}}" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="form-label">Peso <span style="color: red;">*</span></label>
+                            <input type="text" name="peso" id="peso" class="form-control" placeholder="KG" required
+                                value="{{peso}}" />
+                        </div>
+                    </div>
+                    <hr class="hr">
+                </div>
+
+                <div id="step-3" class="content">
+                    <div class="content-header mb-3">
+                        <h6 class="mb-0">3. Variantes</h6>
+                        <small>Detalhes de variantes</small>
+                    </div>
+                    <div class="row g-3">
+                        <h6>Variantes do produto</h6>
+                        <div class="card-body">
+                            <div class="form-repeater">
+                                <div class="row" id="campo1">
+
+                                </div>
+                                <div id="camposDinamicos">
+                                </div>
+                                <div class="mb-0">
+                                    <button type="button" class="btn btn-primary" type="button"
+                                        onclick="adicionarCampo()">
+                                        <i class="bx bx-plus"></i>
+                                        <span class="align-middle">Adicionar Variante</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="hr">
+                        <h6>4. Site</h6>
+                        <div class="col-sm-6">
+                            <label class="switch">
+                                <input {{exibir}} type="checkbox" name="exibir" class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">Exibir produto no meu site?</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Tipo destaque site</label>
+                            <select class="form-control" name="destaque">
+                                <option disabled selected>Escolha uma opção</option>
+                                <option value="1" {{selected1}}>Simples</option>
+                                <option value="2" {{selected2}}>Destaque</option>
+                                <option value="3" {{selected3}}>Super Destaque</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr class="hr">
+                <!-- Anotações -->
+                <div id="step-4" class="content">
+                    <div class="content-header mb-3">
+                        <h6 class="mb-0">5. Imagens</h6>
+                        <small>Demosntração dos produtos</small>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <div class="upload-container" id="upload-container">
+                                    <span class="upload-text">Solte os arquivos aqui ou clique para fazer upload da
+                                        imagens</span>
+                                    <input type="file" id="file-input" multiple />
+                                    <div class="preview-container" id="preview-container"></div>
+                                </div>
+                                <div id="upload-form">
+                                    <div id="hidden-inputs"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-12 d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success" type="button">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+    <script>
+
+        const imagensIniciais = {{files}};
+        document.addEventListener('DOMContentLoaded', function () {
+            const previewContainer = document.getElementById('preview-container');
+            const hiddenInputsContainer = document.getElementById('hidden-inputs');
+            const uploadContainer = document.getElementById('upload-container');
+
+            // Função para adicionar imagem ao preview e aos inputs ocultos
+            function adicionarImagemPreview(imageUrl) {
+                const preview = document.createElement('div');
+                preview.classList.add('preview');
+
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = 'Imagem existente';
+
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('remove-button');
+                removeButton.textContent = 'X';
+                removeButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    preview.remove();
+                    hiddenInput.remove();
+                    updateHiddenInputsOrder();
+                    if (!previewContainer.hasChildNodes()) {
+                        uploadContainer.classList.remove('hidden');
+                        document.getElementById('file-input').value = '';
+                    }
+                });
+
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'files[]';
+                hiddenInput.value = imageUrl;
+
+                preview.appendChild(img);
+                preview.appendChild(removeButton);
+                previewContainer.appendChild(preview);
+                hiddenInputsContainer.appendChild(hiddenInput);
+            }
+
+            // Renderizar imagens iniciais do backend
+            if (typeof imagensIniciais !== 'undefined' && Array.isArray(imagensIniciais)) {
+                imagensIniciais.forEach(imagem => {
+                    adicionarImagemPreview(imagem.image_url);
+                });
+            }
+
+            // Função para lidar com novas imagens selecionadas pelo usuário
+            document.getElementById('file-input').addEventListener('change', handleFileSelect);
+
+            function handleFileSelect(event) {
+                const files = event.target.files;
+
+                if (files.length > 0) {
+                    uploadContainer.classList.add('hidden');
+                } else {
+                    uploadContainer.classList.remove('hidden');
+                }
+
+                Array.from(files).forEach((file) => {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        adicionarImagemPreview(e.target.result);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+
+                document.getElementById('file-input').value = '';
+            }
+
+            // Adicionando drag-and-drop funcionalidade usando Dragula
+            const drake = dragula([previewContainer]);
+            drake.on('drop', (el, target, source, sibling) => {
+                updateHiddenInputsOrder();
+            });
+
+            // Função para atualizar a ordem dos inputs ocultos conforme a posição no preview
+            function updateHiddenInputsOrder() {
+                const previews = Array.from(previewContainer.getElementsByClassName('preview'));
+                const inputs = Array.from(hiddenInputsContainer.getElementsByTagName('input'));
+
+                // Ordena os inputs de acordo com a nova ordem dos previews
+                const newOrder = previews.map(preview => {
+                    const imgSrc = preview.getElementsByTagName('img')[0].src;
+                    return inputs.find(input => input.value === imgSrc);
+                });
+
+                // Limpa os inputs ocultos e reordena
+                hiddenInputsContainer.innerHTML = '';
+                newOrder.forEach(input => hiddenInputsContainer.appendChild(input));
+            }
+        });
+
+        var variants = {{variants}};
+
+        if (variants.length > 0) {
+            variants.forEach((variant, index) => {
+                adicionarCampo(variant.size, variant.color, variant.stock, index + 1);
+            });
+        }
+
+
+        var controleCampo = 1;
+
+        function adicionarCampo(size = '', color = '#000000', stock = 0, campoId = null) {
+            if (!campoId) {
+                controleCampo++;
+            } else {
+                controleCampo = campoId;
+            }
+
+            var novoCampoHTML = '<div class="row" id="campo' + controleCampo + '">'
+                + '<div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">'
+                + '<label class="form-label" for="form-repeater-' + controleCampo + '">Tamanho <span style="color: red;">*</span></label>'
+                + '<input name="variants[size][]" type="text" id="form-repeater-' + controleCampo + '" class="form-control" value="' + size + '" required>'
+                + '</div>'
+                + '<div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">'
+                + '<label class="form-label" for="form-repeater-' + controleCampo + '">Cor <span style="color: red;">*</span></label>'
+                + '<input name="variants[color][]" type="color" id="form-repeater-' + controleCampo + '" class="form-control" value="' + color + '" required>'
+                + '</div>'
+                + '<div class="mb-3 col-lg-4 col-xl-4 col-12 mb-0">'
+                + '<label class="form-label" for="form-repeater-' + controleCampo + '">Estoque <span style="color: red;">*</span></label>'
+                + '<input name="variants[stock][]" type="number" id="form-repeater-' + controleCampo + '" class="form-control" value="' + stock + '" required>'
+                + '</div>'
+                + '<div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'
+                + '<button type="button" class="btn btn-label-danger mt-4" onclick="removerCampo(' + controleCampo + ')">'
+                + '<i class="bx bx-x"></i><span class="align-middle">Apagar</span></button>'
+                + '</div>'
+                + '</div>';
+
+            document.getElementById('camposDinamicos').insertAdjacentHTML('beforeend', novoCampoHTML);
+        }
+
+        function removerCampo(idCampo) {
+            document.getElementById('campo' + idCampo).remove();
+        }
+        function formatCurrency(value) {
+            value = value.replace(/\D/g, '');
+            if (value) {
+                value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
+                value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else {
+                value = '';
+            }
+            return value;
+        }
+
+        function formatCM(value) {
+            value = value.replace(/\D/g, '');
+            if (value) {
+                value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
+                value += ' CM';
+            } else {
+                value = '';
+            }
+            return value;
+        }
+
+        function formatKG(value) {
+            value = value.replace(/\D/g, '');
+            if (value) {
+                value = (parseInt(value, 10) / 1000).toFixed(3).replace('.', ',');
+                value += ' KG';
+            } else {
+                value = '';
+            }
+            return value;
+        }
+
+        function addCurrencyFormatter(id) {
+            document.getElementById(id).addEventListener('input', function (e) {
+                e.target.value = formatCurrency(e.target.value);
+            });
+        }
+
+        function addCMFormatter(id) {
+            document.getElementById(id).addEventListener('input', function (e) {
+                e.target.value = formatCM(e.target.value);
+            });
+        }
+
+        function addKGFormatter(id) {
+            document.getElementById(id).addEventListener('input', function (e) {
+                e.target.value = formatKG(e.target.value);
+            });
+        }
+
+        addCurrencyFormatter('price');
+        addCMFormatter('comprimento');
+        addCMFormatter('largura');
+        addCMFormatter('altura');
+        addKGFormatter('peso');
+
+        function validarSelects() {
+            const selects = document.querySelectorAll('select');
+            let allValid = true;
+
+            selects.forEach(select => {
+                if (!select.value.trim()) {
+                    allValid = false;
+                    select.classList.add('is-invalid');
+                } else {
+                    select.classList.remove('is-invalid');
+                }
+            });
+            return allValid;
+        }
+
+        document.getElementById('freeShipping').addEventListener('change', function () {
+            var comprimento = document.getElementById('comprimento');
+            var largura = document.getElementById('largura');
+            var altura = document.getElementById('altura');
+            var peso = document.getElementById('peso');
+
+            if (this.checked) {
+                comprimento.removeAttribute('required');
+                largura.removeAttribute('required');
+                altura.removeAttribute('required');
+                peso.removeAttribute('required');
+            } else {
+                comprimento.setAttribute('required', 'required');
+                largura.setAttribute('required', 'required');
+                altura.setAttribute('required', 'required');
+                peso.setAttribute('required', 'required');
+            }
+        });
+    </script>
+
+
+</div>

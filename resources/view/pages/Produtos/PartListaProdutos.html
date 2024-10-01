@@ -1,0 +1,73 @@
+<form method="post">
+<tr>
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+                <img style="height: 50px; width: 50px; border-radius: 7px;" src="{{URL}}/resources/view/assets/uploads/{{idTenant}}/{{foto}}">
+            </div>
+        </div>
+    </td>
+
+
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+                <span class="fw-semibold lh-1">{{nome}}</span>
+            </div>
+        </div>
+    </td>
+
+
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+                <span class="fw-semibold lh-1"><span
+                        class="fw-medium text-nowrap badge bg-label-success">{{categoria}}</span></span>
+                <input type="hidden" value="{{id}}" name="id" />
+            </div>
+        </div>
+    </td>
+
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+                <span class="fw-semibold lh-1">{{quantidade}}</span>
+            </div>
+        </div>
+    </td>
+
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+                <span class="fw-semibold lh-1">R$ {{valor}}</span>
+            </div>
+        </div>
+    </td>
+
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+                <span class="fw-semibold lh-1"><span
+                    class="text-nowrap badge bg-label-{{color}}">{{status}}</span></span>
+                
+            </div>
+        </div>
+    </td>
+
+
+    <td>
+        <div class="dropdown">
+            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" type="submit" value="editar" name="editar" href="edit/{{id}}"><i class="bx bx-edit me-1"></i>Editar Produto</a>
+                <button class="dropdown-item" type="submit" value="excluir" name="excluir" value="excluir">
+                    <i class="bx bx-trash me-1"></i>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </td>
+</tr>
+</form>

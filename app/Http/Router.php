@@ -100,8 +100,8 @@ class Router
             }
         }
 
-        //self::redirect('/404', 404);
-        throw new Exception("URL não encontrada", 404);
+        self::redirect('/404', 404);
+        //throw new Exception("URL não encontrada", 404);
     }
 
     public function run()
